@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>browser-amd-editor</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            padding: 0;
+            margin: 0;
+        }
+
+        .container {
+            padding: 0;
+            margin: 0;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Editor window -->
+    <div id="container" style="width:100vw;height:100vh"></div>
+
+    <!-- !!Put all site content here!! -->
+    <pre id="website_main" hidden>
+#! /usr/bin/env python3
+
+class CoffeeCrew(Friends, CoffeeConsumer):
+    """A collection of absolute nerds with a fixation on caffeine"""
+
+    members:list = [
+        {
+            "name":"Evan Pratten", 
+            "GitHub":"@ewpratten", 
+            "website":"https://retrylife.ca"
+        },
+        {
+            "name":"Carter Tomlenovich", 
+            "GitHub":"@hyperliskdev", 
+            "website":"https://hyperlisk.dev"
+        },
+        {
+            "name":"Silas Bartha", 
+            "GitHub":"@exvacuum", 
+            "website":"https://exvacuum.dev"
+        }
+    ]
+
+    def __init__(self):
+        for member in self.members:
+            super.caffeinate(member)
+</pre>
+
+    <!-- Editor loader -->
+    <script src="editor/loader.js"></script>
+    <script>
+        require.config({ paths: { 'vs': 'editor' } });
+
+        require(['vs/editor/editor.main'], function () {
+            var editor = monaco.editor.create(document.getElementById('container'), {
+                value: document.getElementById("website_main").innerText,
+                language: 'python'
+            });
+
+            monaco.editor.setTheme("vs-dark");
+        });
+    </script>
+</body>
+
+</html>
